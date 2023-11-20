@@ -1,0 +1,5 @@
+index,itemText,type,options,ticks,tickLabels,layout,itemColor,itemWidth,responseColor,responseWidth,granularity,font
+1,How many languages do you know?,free text,,,,horiz,,0.5,,0.3,,
+2,"List them, separated by comma (e.g. Chinese, English, Spanish)",free text,,,,horiz,,0.5,,1,,
+3,"Please rate corresponding proficiency, separated by comma (e.g. 10, 9, 1)",free text,,,,horiz,,0.5,,1,,
+4,Provide a summed number of all the proficiencies.,free text,,,,horiz,,0.5,,0.3,,
