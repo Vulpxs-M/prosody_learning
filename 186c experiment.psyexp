@@ -8,7 +8,7 @@
     <Param val="u'data/%s_%s_%s' % (expInfo['participant'], expName, expInfo['date'])" valType="code" updates="None" name="Data filename"/>
     <Param val="True" valType="bool" updates="None" name="Enable Escape"/>
     <Param val="" valType="str" updates="None" name="End Message"/>
-    <Param val="{'participant':'f&quot;{randint(0, 999999):06.0f}&quot;', 'session':'001'}" valType="code" updates="None" name="Experiment info"/>
+    <Param val="{'participant': 'randint(100, 999)'}" valType="code" updates="None" name="Experiment info"/>
     <Param val="True" valType="bool" updates="None" name="Force stereo"/>
     <Param val="True" valType="bool" updates="None" name="Full-screen window"/>
     <Param val="" valType="str" updates="None" name="HTML path"/>
@@ -26,7 +26,7 @@
     <Param val="False" valType="bool" updates="None" name="Show mouse"/>
     <Param val="height" valType="str" updates="None" name="Units"/>
     <Param val="" valType="str" updates="None" name="Use version"/>
-    <Param val="[1470, 956]" valType="list" updates="None" name="Window size (pixels)"/>
+    <Param val="[1512, 982]" valType="list" updates="None" name="Window size (pixels)"/>
     <Param val="none" valType="str" updates="None" name="backgroundFit"/>
     <Param val="" valType="str" updates="None" name="backgroundImg"/>
     <Param val="avg" valType="str" updates="None" name="blendMode"/>
@@ -50,7 +50,7 @@
     <Param val="4242" valType="num" updates="None" name="gpPort"/>
     <Param val="ioHub" valType="str" updates="None" name="keyboardBackend"/>
     <Param val="exp" valType="code" updates="None" name="logging level"/>
-    <Param val="MIDDLE_BUTTON" valType="list" updates="None" name="mgBlink"/>
+    <Param val="('MIDDLE_BUTTON',)" valType="list" updates="None" name="mgBlink"/>
     <Param val="CONTINUOUS" valType="str" updates="None" name="mgMove"/>
     <Param val="0.5" valType="num" updates="None" name="mgSaccade"/>
     <Param val="0.6" valType="num" updates="None" name="plConfidenceThreshold"/>
@@ -106,12 +106,12 @@
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
         <Param val="" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-        <Param val="Welcome to the experiment! &amp;#10;&amp;#10;This experiment will require you to have headphones, so please have them on. &amp;#10;&amp;#10;You will first have a few survey questions to answer. Please answer to the best of your ability! &amp;#10;&amp;#10;When you are ready, press &quot;space&quot;. &amp;#10;&amp;#10;" valType="str" updates="constant" name="text"/>
+        <Param val="Welcome to the experiment! &amp;#10;&amp;#10;This experiment will require you to have headphones, so please have them on. &amp;#10;&amp;#10;You will first have a few survey questions to answer. Please answer to the best of your ability! &amp;#10;&amp;#10;When you are ready, press &quot;right arrow&quot;. &amp;#10;&amp;#10;" valType="str" updates="constant" name="text"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
       <KeyboardComponent name="intro_key_resp" plugin="None">
-        <Param val="'space'" valType="list" updates="constant" name="allowedKeys"/>
+        <Param val="'right'" valType="list" updates="constant" name="allowedKeys"/>
         <Param val="" valType="str" updates="constant" name="correctAns"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="True" valType="bool" updates="constant" name="discard previous"/>
@@ -130,10 +130,10 @@
         <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
       </KeyboardComponent>
       <CodeComponent name="init_code" plugin="None">
-        <Param val="# Defines Participant's Condition&amp;#10;isMono = True&amp;#10;&amp;#10;# Declare number of training/trials beforehand&amp;#10;NUM_TRAINING = 1&amp;#10;NUM_SAMPLES = 1&amp;#10;NUM_SIGNAL = 2&amp;#10;NUM_NOISE_SIMILAR = 1&amp;#10;NUM_NOISE_DIFFERENT = 1&amp;#10;&amp;#10;# Define PATHs&amp;#10;PATH_FORM_LIST = 'src/186c experiment survey form.csv'&amp;#10;&amp;#10;PATH_TRAINING_LIST = 'src/training_list.csv'&amp;#10;PATH_TRAINING_AUDIO = 'audio/stimuli'&amp;#10;&amp;#10;PATH_SAMPLE_LIST = 'src/sample_list.csv'&amp;#10;PATH_SAMPLE_AUDIO = 'audio/stimuli'&amp;#10;&amp;#10;PATH_TRIAL_LIST = 'src/trial_list.csv'&amp;#10;PATH_TRIAL_AUDIO = 'audio/stimuli'&amp;#10;&amp;#10;# Initial Processing&amp;#10;isMono = isMono % 2 == 1&amp;#10;# Note: names in condition_list corresponds to the column names in csv&amp;#10;condition_list = ['rhythmic', 'monotone']&amp;#10;condition = condition_list[isMono]&amp;#10;&amp;#10;NUM_TRIALS = NUM_SIGNAL + NUM_NOISE_SIMILAR + NUM_NOISE_DIFFERENT&amp;#10;&amp;#10;# Coding Test Realm&amp;#10;#NUM_TRAINING = NUM_TRAINING if len(data.importConditions(PATH_TRAINING_LIST)) &gt; NUM_TRAINING else len(data.importConditions(PATH_TRAINING_LIST))" valType="extendedCode" updates="constant" name="Before Experiment"/>
-        <Param val="isMono = true;&amp;#10;NUM_TRAINING = 1;&amp;#10;NUM_SAMPLES = 1;&amp;#10;NUM_SIGNAL = 2;&amp;#10;NUM_NOISE_SIMILAR = 1;&amp;#10;NUM_NOISE_DIFFERENT = 1;&amp;#10;PATH_FORM_LIST = &quot;src/186c experiment survey form.csv&quot;;&amp;#10;PATH_TRAINING_LIST = &quot;src/training_list.csv&quot;;&amp;#10;PATH_TRAINING_AUDIO = &quot;audio/stimuli&quot;;&amp;#10;PATH_SAMPLE_LIST = &quot;src/sample_list.csv&quot;;&amp;#10;PATH_SAMPLE_AUDIO = &quot;audio/stimuli&quot;;&amp;#10;PATH_TRIAL_LIST = &quot;src/trial_list.csv&quot;;&amp;#10;PATH_TRIAL_AUDIO = &quot;audio/stimuli&quot;;&amp;#10;isMono = ((isMono % 2) === 1);&amp;#10;condition_list = [&quot;rhythmic&quot;, &quot;monotone&quot;];&amp;#10;condition = condition_list[isMono];&amp;#10;NUM_TRIALS = ((NUM_SIGNAL + NUM_NOISE_SIMILAR) + NUM_NOISE_DIFFERENT);&amp;#10;" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="# Datalogging&amp;#10;import pandas as pd" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="import * as pd from 'pandas';&amp;#10;" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="# Declare number of training/trials beforehand&amp;#10;NUM_TRAINING = 1            # max 6&amp;#10;NUM_SAMPLES = 1             # max 2&amp;#10;NUM_SIGNAL = 2              # max 16&amp;#10;NUM_NOISE_SIMILAR = 1       # max 8&amp;#10;NUM_NOISE_DIFFERENT = 1     # max 8&amp;#10;NUM_TRIALS = NUM_SIGNAL + NUM_NOISE_SIMILAR + NUM_NOISE_DIFFERENT&amp;#10;&amp;#10;# Define PATHs&amp;#10;PATH_FORM_LIST = 'src/186c experiment survey form.csv'&amp;#10;&amp;#10;PATH_TRAINING_LIST = 'src/training_list.csv'&amp;#10;PATH_TRAINING_AUDIO = 'audio/stimuli'&amp;#10;&amp;#10;PATH_SAMPLE_LIST = 'src/sample_list.csv'&amp;#10;PATH_SAMPLE_AUDIO = 'audio/stimuli'&amp;#10;&amp;#10;PATH_TRIAL_LIST = 'src/trial_list.csv'&amp;#10;PATH_TRIAL_AUDIO = 'audio/stimuli'&amp;#10;&amp;#10;PATH_FORM_DATA = f'experiment_data/{expInfo[&quot;participant&quot;]}_form.csv'&amp;#10;PATH_EXPERIMENT_DATA = f'experiment_data/{expInfo[&quot;participant&quot;]}_data.csv'&amp;#10;&amp;#10;# Defines Participant's Condition&amp;#10;isMono = expInfo['participant']&amp;#10;&amp;#10;# Initial Processing&amp;#10;isMono = isMono % 2 == 1&amp;#10;# Note: names in condition_list corresponds to the column names in csv&amp;#10;condition_list = ['rhythmic', 'monotone']&amp;#10;condition = condition_list[isMono]&amp;#10;&amp;#10;&amp;#10;# Datalogging&amp;#10;df = pd.DataFrame({'Signal': pd.Series(dtype='int'),&amp;#10;                   'Response': pd.Series(dtype='int'),&amp;#10;                   'Duration': pd.Series(dtype='float')})&amp;#10;&amp;#10;&amp;#10;# Coding Test Realm&amp;#10;#NUM_TRAINING = NUM_TRAINING if len(data.importConditions(PATH_TRAINING_LIST)) &gt; NUM_TRAINING else len(data.importConditions(PATH_TRAINING_LIST))" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="NUM_TRAINING = 1;&amp;#10;NUM_SAMPLES = 1;&amp;#10;NUM_SIGNAL = 2;&amp;#10;NUM_NOISE_SIMILAR = 1;&amp;#10;NUM_NOISE_DIFFERENT = 1;&amp;#10;NUM_TRIALS = ((NUM_SIGNAL + NUM_NOISE_SIMILAR) + NUM_NOISE_DIFFERENT);&amp;#10;PATH_FORM_LIST = &quot;src/186c experiment survey form.csv&quot;;&amp;#10;PATH_TRAINING_LIST = &quot;src/training_list.csv&quot;;&amp;#10;PATH_TRAINING_AUDIO = &quot;audio/stimuli&quot;;&amp;#10;PATH_SAMPLE_LIST = &quot;src/sample_list.csv&quot;;&amp;#10;PATH_SAMPLE_AUDIO = &quot;audio/stimuli&quot;;&amp;#10;PATH_TRIAL_LIST = &quot;src/trial_list.csv&quot;;&amp;#10;PATH_TRIAL_AUDIO = &quot;audio/stimuli&quot;;&amp;#10;PATH_FORM_DATA = `experiment_data/${expInfo[&quot;participant&quot;]}_form.csv`;&amp;#10;PATH_EXPERIMENT_DATA = `experiment_data/${expInfo[&quot;participant&quot;]}_data.csv`;&amp;#10;isMono = expInfo[&quot;participant&quot;];&amp;#10;isMono = ((isMono % 2) === 1);&amp;#10;condition_list = [&quot;rhythmic&quot;, &quot;monotone&quot;];&amp;#10;condition = condition_list[isMono];&amp;#10;df = new pd.DataFrame({&quot;Signal&quot;: new pd.Series({&quot;dtype&quot;: &quot;int&quot;}), &quot;Response&quot;: new pd.Series({&quot;dtype&quot;: &quot;int&quot;}), &quot;Duration&quot;: new pd.Series({&quot;dtype&quot;: &quot;float&quot;})});&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
@@ -163,6 +163,87 @@
         <Param val="" valType="code" updates="constant" name="stopVal"/>
         <Param val="False" valType="bool" updates="None" name="useWindowParams"/>
       </RoutineSettingsComponent>
+      <CodeComponent name="code" plugin="None">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="if form.complete:&amp;#10;    survey_button.fillColor = 'blue'&amp;#10;    survey_button.color = 'white'&amp;#10;else:&amp;#10;    survey_button.fillColor = 'white'&amp;#10;    survey_button.color = 'white'" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="if (form.complete) {&amp;#10;    survey_button.fillColor = &quot;blue&quot;;&amp;#10;    survey_button.color = &quot;white&quot;;&amp;#10;} else {&amp;#10;    survey_button.fillColor = &quot;white&quot;;&amp;#10;    survey_button.color = &quot;white&quot;;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="&amp;#10;        // add-on: list(s: string): string[]&amp;#10;        function list(s) {&amp;#10;            // if s is a string, we return a list of its characters&amp;#10;            if (typeof s === 'string')&amp;#10;                return s.split('');&amp;#10;            else&amp;#10;                // otherwise we return s:&amp;#10;                return s;&amp;#10;        }&amp;#10;&amp;#10;        form_data = form.getData();&amp;#10;form_return = list();&amp;#10;for (var item, _pj_c = 0, _pj_a = form_data, _pj_b = _pj_a.length; (_pj_c &lt; _pj_b); _pj_c += 1) {&amp;#10;    item = _pj_a[_pj_c];&amp;#10;    form_return.push(item[&quot;response&quot;]);&amp;#10;}&amp;#10;form_df = new pd.DataFrame([form_return], {&quot;columns&quot;: [&quot;n_languages&quot;, &quot;lang_list&quot;, &quot;prof_list&quot;, &quot;sum_proficiency&quot;]});&amp;#10;form_df.to_csv(PATH_FORM_DATA);&amp;#10;" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="form_data = form.getData()&amp;#10;form_return = list()&amp;#10;for item in form_data:&amp;#10;    form_return.append(item['response'])&amp;#10;&amp;#10;form_df = pd.DataFrame([form_return],&amp;#10;                       columns = ['n_languages',&amp;#10;                                  'lang_list',&amp;#10;                                  'prof_list',&amp;#10;                                  'sum_proficiency'])&amp;#10;form_df.to_csv(PATH_FORM_DATA)" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="code" valType="code" updates="None" name="name"/>
+      </CodeComponent>
+      <FormComponent name="form" plugin="None">
+        <Param val="rows" valType="str" updates="constant" name="Data Format"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="Font"/>
+        <Param val="0.05" valType="num" updates="constant" name="Item Padding"/>
+        <Param val="$PATH_FORM_LIST" valType="file" updates="constant" name="Items"/>
+        <Param val="False" valType="bool" updates="constant" name="Randomize"/>
+        <Param val="custom..." valType="str" updates="constant" name="Style"/>
+        <Param val="0.03" valType="num" updates="constant" name="Text Height"/>
+        <Param val="transparent" valType="color" updates="constant" name="borderColor"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="white" valType="color" updates="constant" name="fillColor"/>
+        <Param val="black" valType="color" updates="constant" name="itemColor"/>
+        <Param val="black" valType="color" updates="constant" name="markerColor"/>
+        <Param val="form" valType="code" updates="None" name="name"/>
+        <Param val="1" valType="num" updates="constant" name="opacity"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="black" valType="color" updates="constant" name="responseColor"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="(1, 1)" valType="list" updates="constant" name="size"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="3" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+      </FormComponent>
+      <ButtonComponent name="survey_button" plugin="None">
+        <Param val="center" valType="str" updates="constant" name="anchor"/>
+        <Param val="True" valType="bool" updates="constant" name="bold"/>
+        <Param val="None" valType="color" updates="constant" name="borderColor"/>
+        <Param val="0" valType="num" updates="constant" name="borderWidth"/>
+        <Param val="if form.complete:&amp;#10;    continueRoutine = False" valType="extendedCode" updates="constant" name="callback"/>
+        <Param val="white" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="white" valType="color" updates="constant" name="fillColor"/>
+        <Param val="Arvo" valType="str" updates="constant" name="font"/>
+        <Param val="False" valType="bool" updates="constant" name="forceEndRoutine"/>
+        <Param val="False" valType="bool" updates="constant" name="italic"/>
+        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="survey_button" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="constant" name="oncePerClick"/>
+        <Param val="1" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="" valType="num" updates="constant" name="padding"/>
+        <Param val="(0, -.45)" valType="list" updates="constant" name="pos"/>
+        <Param val="every click" valType="str" updates="None" name="save"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="(0.2, 0.1)" valType="list" updates="constant" name="size"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="3" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="Done!" valType="str" updates="constant" name="text"/>
+        <Param val="button onset" valType="str" updates="constant" name="timeRelativeTo"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+      </ButtonComponent>
       <TextComponent name="survey_text" plugin="None">
         <Param val="white" valType="color" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
@@ -182,7 +263,7 @@
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="0.0" valType="code" updates="None" name="startVal"/>
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="3" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
 <<<<<<< HEAD
         <Param val="Please answer the following presurvey questions!&amp;#10;&amp;#10;&amp;#10;" valType="str" updates="constant" name="text"/>
@@ -192,70 +273,6 @@
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
-      <FormComponent name="form" plugin="None">
-        <Param val="rows" valType="str" updates="constant" name="Data Format"/>
-        <Param val="Open Sans" valType="str" updates="constant" name="Font"/>
-        <Param val="0.05" valType="num" updates="constant" name="Item Padding"/>
-        <Param val="$PATH_FORM_LIST" valType="file" updates="constant" name="Items"/>
-        <Param val="False" valType="bool" updates="constant" name="Randomize"/>
-        <Param val="dark" valType="str" updates="constant" name="Style"/>
-        <Param val="0.03" valType="num" updates="constant" name="Text Height"/>
-        <Param val="" valType="color" updates="constant" name="borderColor"/>
-        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
-        <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="" valType="code" updates="None" name="durationEstim"/>
-        <Param val="" valType="color" updates="constant" name="fillColor"/>
-        <Param val="white" valType="color" updates="constant" name="itemColor"/>
-        <Param val="red" valType="color" updates="constant" name="markerColor"/>
-        <Param val="form" valType="code" updates="None" name="name"/>
-        <Param val="" valType="num" updates="constant" name="opacity"/>
-        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
-        <Param val="white" valType="color" updates="constant" name="responseColor"/>
-        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="(1, 1)" valType="list" updates="constant" name="size"/>
-        <Param val="" valType="code" updates="None" name="startEstim"/>
-        <Param val="time (s)" valType="str" updates="None" name="startType"/>
-        <Param val="0.0" valType="code" updates="None" name="startVal"/>
-        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="" valType="code" updates="constant" name="stopVal"/>
-        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-      </FormComponent>
-      <ButtonComponent name="survey_button" plugin="None">
-        <Param val="center" valType="str" updates="constant" name="anchor"/>
-        <Param val="True" valType="bool" updates="constant" name="bold"/>
-        <Param val="None" valType="color" updates="constant" name="borderColor"/>
-        <Param val="0" valType="num" updates="constant" name="borderWidth"/>
-        <Param val="" valType="extendedCode" updates="constant" name="callback"/>
-        <Param val="white" valType="color" updates="constant" name="color"/>
-        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
-        <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="" valType="code" updates="None" name="durationEstim"/>
-        <Param val="blue" valType="color" updates="constant" name="fillColor"/>
-        <Param val="Arvo" valType="str" updates="constant" name="font"/>
-        <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
-        <Param val="False" valType="bool" updates="constant" name="italic"/>
-        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
-        <Param val="survey_button" valType="code" updates="None" name="name"/>
-        <Param val="True" valType="bool" updates="constant" name="oncePerClick"/>
-        <Param val="" valType="num" updates="constant" name="opacity"/>
-        <Param val="0" valType="num" updates="constant" name="ori"/>
-        <Param val="" valType="num" updates="constant" name="padding"/>
-        <Param val="(0, -.45)" valType="list" updates="constant" name="pos"/>
-        <Param val="every click" valType="str" updates="None" name="save"/>
-        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="(0.2, 0.1)" valType="list" updates="constant" name="size"/>
-        <Param val="" valType="code" updates="None" name="startEstim"/>
-        <Param val="time (s)" valType="str" updates="None" name="startType"/>
-        <Param val="0" valType="code" updates="None" name="startVal"/>
-        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="" valType="code" updates="constant" name="stopVal"/>
-        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-        <Param val="Done!" valType="str" updates="constant" name="text"/>
-        <Param val="button onset" valType="str" updates="constant" name="timeRelativeTo"/>
-        <Param val="from exp settings" valType="str" updates="None" name="units"/>
-      </ButtonComponent>
     </Routine>
     <Routine name="training">
       <RoutineSettingsComponent name="training" plugin="None">
@@ -385,8 +402,8 @@
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="new_row = new pd.Series({&quot;Signal&quot;: trial_list[trial_loop.thisRepN][1], &quot;Response&quot;: Number.parseInt(trial_kb.keys), &quot;Duration&quot;: trial_kb.rt});&amp;#10;console.log(new_row);&amp;#10;df = pd.concat([df, new_row.to_frame().T], {&quot;ignore_index&quot;: true});&amp;#10;" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="new_row = pd.Series({'Signal': trial_list[trial_loop.thisRepN][1],&amp;#10;                     'Response': int(trial_kb.keys),&amp;#10;                     'Duration': trial_kb.rt})&amp;#10;&amp;#10;print(new_row)&amp;#10;df = pd.concat([df, new_row.to_frame().T], ignore_index=True)" valType="extendedCode" updates="constant" name="End Routine"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="trial_code" valType="code" updates="None" name="name"/>
       </CodeComponent>
@@ -517,6 +534,23 @@
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
+      <CodeComponent name="conc_code" plugin="None">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="df.to_csv(PATH_EXPERIMENT_DATA);&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="df.to_csv(PATH_EXPERIMENT_DATA)" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="conc_code" valType="code" updates="None" name="name"/>
+      </CodeComponent>
     </Routine>
     <Routine name="training_instr">
       <RoutineSettingsComponent name="training_instr" plugin="None">
@@ -819,6 +853,23 @@
         <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
         <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
       </KeyboardComponent>
+    </Routine>
+    <Routine name="presurvey_instr">
+      <RoutineSettingsComponent name="presurvey_instr" plugin="None">
+        <Param val="none" valType="str" updates="None" name="backgroundFit"/>
+        <Param val="" valType="str" updates="None" name="backgroundImg"/>
+        <Param val="$[0,0,0]" valType="color" updates="None" name="color"/>
+        <Param val="rgb" valType="str" updates="None" name="colorSpace"/>
+        <Param val="" valType="str" updates="constant" name="desc"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="presurvey_instr" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="constant" name="skipIf"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="False" valType="bool" updates="None" name="useWindowParams"/>
+      </RoutineSettingsComponent>
     </Routine>
   </Routines>
   <Flow>
