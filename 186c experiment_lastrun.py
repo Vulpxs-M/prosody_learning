@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2023.2.2),
-    on Tue Nov 28 17:36:31 2023
+    on Tue Nov 28 22:32:47 2023
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -338,13 +338,13 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     PATH_FORM_LIST = 'src/186c experiment survey form.csv'
     
     PATH_TRAINING_LIST = 'src/training_list.csv'
-    PATH_TRAINING_AUDIO = 'audio/stimuli'
+    PATH_TRAINING_AUDIO = 'audio'
     
     PATH_SAMPLE_LIST = 'src/sample_list.csv'
-    PATH_SAMPLE_AUDIO = 'audio/stimuli'
+    PATH_SAMPLE_AUDIO = 'audio'
     
     PATH_TRIAL_LIST = 'src/trial_list.csv'
-    PATH_TRIAL_AUDIO = 'audio/stimuli'
+    PATH_TRIAL_AUDIO = 'audio'
     
     PATH_FORM_DATA = f'experiment_data/{expInfo["participant"]}_form.csv'
     PATH_EXPERIMENT_DATA = f'experiment_data/{expInfo["participant"]}_data.csv'
@@ -399,7 +399,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     )
     survey_button.buttonClock = core.Clock()
     survey_text = visual.TextStim(win=win, name='survey_text',
-        text='Please answer the following presurvey questions!\n\n',
+        text='Please answer the following presurvey questions!\n\n\n',
         font='Open Sans',
         pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
@@ -443,7 +443,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     
     # --- Initialize components for Routine "sample_instr" ---
     sample_start = visual.TextStim(win=win, name='sample_start',
-        text='For the second part, you will be listening to more audio clips. \n\nHowever, these audio clips will be muffled, and your task will be to identify if the played clip is the same language you heard in the last part. \n\nYou will first be given a few sample clips to practice with.\n\nPress "space" to begin. ',
+        text='For the second part, you will be listening to more audio clips. \n\nHowever, these audio clips will be muffled, and your task will be to identify if the played clip is the same language you heard in the first part. \n\nYou will first be given a few sample clips to practice with.\n\nWhen it prompts you to answer, press key "1" to say yes and key "2" to say no.\n\nPress "space" to begin playing samples. ',
         font='Open Sans',
         pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
@@ -469,7 +469,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         depth=-2.0);
     sample_kb = keyboard.Keyboard()
     sample_text = visual.TextStim(win=win, name='sample_text',
-        text='Do you think this is the language you learned?',
+        text='Do you think this is the language you learned?\n\n(This is a sample)',
         font='Open Sans',
         pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
@@ -478,7 +478,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     
     # --- Initialize components for Routine "trial_instr" ---
     trial_start = visual.TextStim(win=win, name='trial_start',
-        text='You will be listening to more audio clips. \n\nHowever, these audio clips will be muffled, and your task will be to identify if the played clip is the same language you heard in the last part. \n\nThis is the actual test.\nPress "space" to begin. ',
+        text='Now begins the actual task:\n\nYou will be listening to more audio clips like the samples. \n\nYour task will be to identify if the played clip is the same language you heard in the first part. \n\nRemember, key "1" is for yes and key "2" is for no.\n\nPress "space" to begin.',
         font='Open Sans',
         pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
@@ -514,7 +514,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     
     # --- Initialize components for Routine "conclusion" ---
     conclusion_text = visual.TextStim(win=win, name='conclusion_text',
-        text='TODO',
+        text="You've finished the task!\n\nThank you for participating.",
         font='Open Sans',
         pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
@@ -803,12 +803,14 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     form_return = list()
     for item in form_data:
         form_return.append(item['response'])
+    form_return.append(isMono)
     
     form_df = pd.DataFrame([form_return],
                            columns = ['n_languages',
                                       'lang_list',
                                       'prof_list',
-                                      'sum_proficiency'])
+                                      'sum_proficiency',
+                                      'isMono'])
     form_df.to_csv(PATH_FORM_DATA)
     form.addDataToExp(thisExp, 'rows')
     form.autodraw = False
@@ -1848,10 +1850,9 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         thisExp.addData('trial.stopped', globalClock.getTime())
         # Run 'End Routine' code from trial_code
         new_row = pd.Series({'Signal': trial_list[trial_loop.thisRepN][1],
-                             'Response': int(trial_kb.keys),
+                             'Response': trial_kb.keys,
                              'Duration': trial_kb.rt})
         
-        print(new_row)
         df = pd.concat([df, new_row.to_frame().T], ignore_index=True)
         trial_sound.pause()  # ensure sound has stopped at end of Routine
         # check responses
