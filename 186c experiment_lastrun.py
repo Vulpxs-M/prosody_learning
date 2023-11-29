@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2023.2.2),
-    on Tue Nov 28 22:32:47 2023
+    on Tue Nov 28 22:56:22 2023
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -327,11 +327,11 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     intro_key_resp = keyboard.Keyboard()
     # Run 'Begin Experiment' code from init_code
     # Declare number of training/trials beforehand
-    NUM_TRAINING = 1            # max 6
-    NUM_SAMPLES = 1             # max 2
-    NUM_SIGNAL = 2              # max 16
-    NUM_NOISE_SIMILAR = 1       # max 8
-    NUM_NOISE_DIFFERENT = 1     # max 8
+    NUM_TRAINING = 6            # max 6
+    NUM_SAMPLES = 2             # max 2
+    NUM_SIGNAL = 16              # max 16
+    NUM_NOISE_SIMILAR = 8       # max 8
+    NUM_NOISE_DIFFERENT = 8     # max 8
     NUM_TRIALS = NUM_SIGNAL + NUM_NOISE_SIMILAR + NUM_NOISE_DIFFERENT
     
     # Define PATHs
