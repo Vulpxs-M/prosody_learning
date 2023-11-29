@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2023.2.2),
-    on Tue Nov 28 14:34:57 2023
+    on Tue Nov 28 17:36:31 2023
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -34,38 +34,8 @@ import psychopy.iohub as io
 from psychopy.hardware import keyboard
 
 # Run 'Before Experiment' code from init_code
-# Defines Participant's Condition
-isMono = True
-
-# Declare number of training/trials beforehand
-NUM_TRAINING = 1
-NUM_SAMPLES = 1
-NUM_SIGNAL = 2
-NUM_NOISE_SIMILAR = 1
-NUM_NOISE_DIFFERENT = 1
-
-# Define PATHs
-PATH_FORM_LIST = 'src/186c experiment survey form.csv'
-
-PATH_TRAINING_LIST = 'src/training_list.csv'
-PATH_TRAINING_AUDIO = 'audio/stimuli'
-
-PATH_SAMPLE_LIST = 'src/sample_list.csv'
-PATH_SAMPLE_AUDIO = 'audio/stimuli'
-
-PATH_TRIAL_LIST = 'src/trial_list.csv'
-PATH_TRIAL_AUDIO = 'audio/stimuli'
-
-# Initial Processing
-isMono = isMono % 2 == 1
-# Note: names in condition_list corresponds to the column names in csv
-condition_list = ['rhythmic', 'monotone']
-condition = condition_list[isMono]
-
-NUM_TRIALS = NUM_SIGNAL + NUM_NOISE_SIMILAR + NUM_NOISE_DIFFERENT
-
-# Coding Test Realm
-#NUM_TRAINING = NUM_TRAINING if len(data.importConditions(PATH_TRAINING_LIST)) > NUM_TRAINING else len(data.importConditions(PATH_TRAINING_LIST))
+# Datalogging
+import pandas as pd
 # --- Setup global variables (available in all functions) ---
 # Ensure that relative paths start from the same directory as this script
 _thisDir = os.path.dirname(os.path.abspath(__file__))
@@ -73,8 +43,7 @@ _thisDir = os.path.dirname(os.path.abspath(__file__))
 psychopyVersion = '2023.2.2'
 expName = '186c experiment'  # from the Builder filename that created this script
 expInfo = {
-    'participant': f"{randint(0, 999999):06.0f}",
-    'session': '001',
+    'participant': randint(100, 999),
     'date': data.getDateStr(),  # add a simple timestamp
     'expName': expName,
     'psychopyVersion': psychopyVersion,
@@ -191,7 +160,7 @@ def setupWindow(expInfo=None, win=None):
     if win is None:
         # if not given a window to setup, make one
         win = visual.Window(
-            size=[1470, 956], fullscr=True, screen=0,
+            size=[1512, 982], fullscr=True, screen=0,
             winType='pyglet', allowStencil=False,
             monitor='testMonitor', color=[0,0,0], colorSpace='rgb',
             backgroundImage='', backgroundFit='none',
@@ -349,31 +318,66 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     
     # --- Initialize components for Routine "intro" ---
     intro_text = visual.TextStim(win=win, name='intro_text',
-        text='Welcome to the experiment! \n\nThis experiment will require you to have headphones, so please have them on. \n\nYou will first have a few survey questions to answer. Please answer to the best of your ability! \n\nWhen you are ready, press "space". \n\n',
+        text='Welcome to the experiment! \n\nThis experiment will require you to have headphones, so please have them on. \n\nYou will first have a few survey questions to answer. Please answer to the best of your ability! \n\nWhen you are ready, press "right arrow". \n\n',
         font='Open Sans',
         pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
     intro_key_resp = keyboard.Keyboard()
+    # Run 'Begin Experiment' code from init_code
+    # Declare number of training/trials beforehand
+    NUM_TRAINING = 1            # max 6
+    NUM_SAMPLES = 1             # max 2
+    NUM_SIGNAL = 2              # max 16
+    NUM_NOISE_SIMILAR = 1       # max 8
+    NUM_NOISE_DIFFERENT = 1     # max 8
+    NUM_TRIALS = NUM_SIGNAL + NUM_NOISE_SIMILAR + NUM_NOISE_DIFFERENT
+    
+    # Define PATHs
+    PATH_FORM_LIST = 'src/186c experiment survey form.csv'
+    
+    PATH_TRAINING_LIST = 'src/training_list.csv'
+    PATH_TRAINING_AUDIO = 'audio/stimuli'
+    
+    PATH_SAMPLE_LIST = 'src/sample_list.csv'
+    PATH_SAMPLE_AUDIO = 'audio/stimuli'
+    
+    PATH_TRIAL_LIST = 'src/trial_list.csv'
+    PATH_TRIAL_AUDIO = 'audio/stimuli'
+    
+    PATH_FORM_DATA = f'experiment_data/{expInfo["participant"]}_form.csv'
+    PATH_EXPERIMENT_DATA = f'experiment_data/{expInfo["participant"]}_data.csv'
+    
+    # Defines Participant's Condition
+    isMono = expInfo['participant']
+    
+    # Initial Processing
+    isMono = isMono % 2 == 1
+    # Note: names in condition_list corresponds to the column names in csv
+    condition_list = ['rhythmic', 'monotone']
+    condition = condition_list[isMono]
+    
+    
+    # Datalogging
+    df = pd.DataFrame({'Signal': pd.Series(dtype='int'),
+                       'Response': pd.Series(dtype='int'),
+                       'Duration': pd.Series(dtype='float')})
+    
+    
+    # Coding Test Realm
+    #NUM_TRAINING = NUM_TRAINING if len(data.importConditions(PATH_TRAINING_LIST)) > NUM_TRAINING else len(data.importConditions(PATH_TRAINING_LIST))
     
     # --- Initialize components for Routine "presurvey_questions" ---
-    survey_text = visual.TextStim(win=win, name='survey_text',
-        text='Please answer the following presurvey questions!\n\n',
-        font='Open Sans',
-        pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
-        color='white', colorSpace='rgb', opacity=None, 
-        languageStyle='LTR',
-        depth=0.0);
     win.allowStencil = True
     form = visual.Form(win=win, name='form',
         items=PATH_FORM_LIST,
         textHeight=0.03,
         font='Open Sans',
         randomize=False,
-        style='dark',
-        fillColor=None, borderColor=None, itemColor='white', 
-        responseColor='white', markerColor='red', colorSpace='rgb', 
+        style='custom...',
+        fillColor='white', borderColor='transparent', itemColor='black', 
+        responseColor='black', markerColor='black', colorSpace='rgb', 
         size=(1, 1),
         pos=(0, 0),
         itemPadding=0.05,
@@ -384,9 +388,9 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         pos=(0, -.45),
         letterHeight=0.05,
         size=(0.2, 0.1), borderWidth=0.0,
-        fillColor='blue', borderColor=None,
+        fillColor='white', borderColor=None,
         color='white', colorSpace='rgb',
-        opacity=None,
+        opacity=1.0,
         bold=True, italic=False,
         padding=None,
         anchor='center',
@@ -394,6 +398,13 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         depth=-2
     )
     survey_button.buttonClock = core.Clock()
+    survey_text = visual.TextStim(win=win, name='survey_text',
+        text='Please answer the following presurvey questions!\n\n',
+        font='Open Sans',
+        pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
+        color='white', colorSpace='rgb', opacity=None, 
+        languageStyle='LTR',
+        depth=-3.0);
     
     # --- Initialize components for Routine "training_instr" ---
     training_text = visual.TextStim(win=win, name='training_text',
@@ -591,7 +602,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
             win.callOnFlip(intro_key_resp.clock.reset)  # t=0 on next screen flip
             win.callOnFlip(intro_key_resp.clearEvents, eventType='keyboard')  # clear events on next screen flip
         if intro_key_resp.status == STARTED and not waitOnFlip:
-            theseKeys = intro_key_resp.getKeys(keyList=['space'], ignoreKeys=["escape"], waitRelease=False)
+            theseKeys = intro_key_resp.getKeys(keyList=['right'], ignoreKeys=["escape"], waitRelease=False)
             _intro_key_resp_allKeys.extend(theseKeys)
             if len(_intro_key_resp_allKeys):
                 intro_key_resp.keys = _intro_key_resp_allKeys[-1].name  # just the last key pressed
@@ -644,7 +655,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     # reset survey_button to account for continued clicks & clear times on/off
     survey_button.reset()
     # keep track of which components have finished
-    presurvey_questionsComponents = [survey_text, form, survey_button]
+    presurvey_questionsComponents = [form, survey_button, survey_text]
     for thisComponent in presurvey_questionsComponents:
         thisComponent.tStart = None
         thisComponent.tStop = None
@@ -666,31 +677,18 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         tThisFlipGlobal = win.getFutureFlipTime(clock=None)
         frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
         # update/draw components on each frame
-        
-        # *survey_text* updates
-        
-        # if survey_text is starting this frame...
-        if survey_text.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
-            # keep track of start time/frame for later
-            survey_text.frameNStart = frameN  # exact frame index
-            survey_text.tStart = t  # local t and not account for scr refresh
-            survey_text.tStartRefresh = tThisFlipGlobal  # on global time
-            win.timeOnFlip(survey_text, 'tStartRefresh')  # time at next scr refresh
-            # add timestamp to datafile
-            thisExp.timestampOnFlip(win, 'survey_text.started')
-            # update status
-            survey_text.status = STARTED
-            survey_text.setAutoDraw(True)
-        
-        # if survey_text is active this frame...
-        if survey_text.status == STARTED:
-            # update params
-            pass
+        # Run 'Each Frame' code from code
+        if form.complete:
+            survey_button.fillColor = 'blue'
+            survey_button.color = 'white'
+        else:
+            survey_button.fillColor = 'white'
+            survey_button.color = 'white'
         
         # *form* updates
         
         # if form is starting this frame...
-        if form.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+        if form.status == NOT_STARTED and tThisFlip >= 3-frameTolerance:
             # keep track of start time/frame for later
             form.frameNStart = frameN  # exact frame index
             form.tStart = t  # local t and not account for scr refresh
@@ -709,7 +707,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         # *survey_button* updates
         
         # if survey_button is starting this frame...
-        if survey_button.status == NOT_STARTED and tThisFlip >= 0-frameTolerance:
+        if survey_button.status == NOT_STARTED and tThisFlip >= 3-frameTolerance:
             # keep track of start time/frame for later
             survey_button.frameNStart = frameN  # exact frame index
             survey_button.tStart = t  # local t and not account for scr refresh
@@ -735,13 +733,44 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
                     # if click is continuing from last frame, update time of clicked until
                     survey_button.timesOff[-1] = survey_button.buttonClock.getTime()
                 if not survey_button.wasClicked:
-                    # end routine when survey_button is clicked
-                    continueRoutine = False
-                if not survey_button.wasClicked:
                     # run callback code when survey_button is clicked
-                    pass
+                    if form.complete:
+                        continueRoutine = False
         # take note of whether survey_button was clicked, so that next frame we know if clicks are new
         survey_button.wasClicked = survey_button.isClicked and survey_button.status == STARTED
+        
+        # *survey_text* updates
+        
+        # if survey_text is starting this frame...
+        if survey_text.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+            # keep track of start time/frame for later
+            survey_text.frameNStart = frameN  # exact frame index
+            survey_text.tStart = t  # local t and not account for scr refresh
+            survey_text.tStartRefresh = tThisFlipGlobal  # on global time
+            win.timeOnFlip(survey_text, 'tStartRefresh')  # time at next scr refresh
+            # add timestamp to datafile
+            thisExp.timestampOnFlip(win, 'survey_text.started')
+            # update status
+            survey_text.status = STARTED
+            survey_text.setAutoDraw(True)
+        
+        # if survey_text is active this frame...
+        if survey_text.status == STARTED:
+            # update params
+            pass
+        
+        # if survey_text is stopping this frame...
+        if survey_text.status == STARTED:
+            # is it time to stop? (based on global clock, using actual start)
+            if tThisFlipGlobal > survey_text.tStartRefresh + 3-frameTolerance:
+                # keep track of stop time/frame for later
+                survey_text.tStop = t  # not accounting for scr refresh
+                survey_text.frameNStop = frameN  # exact frame index
+                # add timestamp to datafile
+                thisExp.timestampOnFlip(win, 'survey_text.stopped')
+                # update status
+                survey_text.status = FINISHED
+                survey_text.setAutoDraw(False)
         
         # check for quit (typically the Esc key)
         if defaultKeyboard.getKeys(keyList=["escape"]):
@@ -769,6 +798,18 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)
     thisExp.addData('presurvey_questions.stopped', globalClock.getTime())
+    # Run 'End Routine' code from code
+    form_data = form.getData()
+    form_return = list()
+    for item in form_data:
+        form_return.append(item['response'])
+    
+    form_df = pd.DataFrame([form_return],
+                           columns = ['n_languages',
+                                      'lang_list',
+                                      'prof_list',
+                                      'sum_proficiency'])
+    form_df.to_csv(PATH_FORM_DATA)
     form.addDataToExp(thisExp, 'rows')
     form.autodraw = False
     thisExp.addData('survey_button.numClicks', survey_button.numClicks)
@@ -1805,6 +1846,13 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
             if hasattr(thisComponent, "setAutoDraw"):
                 thisComponent.setAutoDraw(False)
         thisExp.addData('trial.stopped', globalClock.getTime())
+        # Run 'End Routine' code from trial_code
+        new_row = pd.Series({'Signal': trial_list[trial_loop.thisRepN][1],
+                             'Response': int(trial_kb.keys),
+                             'Duration': trial_kb.rt})
+        
+        print(new_row)
+        df = pd.concat([df, new_row.to_frame().T], ignore_index=True)
         trial_sound.pause()  # ensure sound has stopped at end of Routine
         # check responses
         if trial_kb.keys in ['', [], None]:  # No response was made
@@ -1830,6 +1878,8 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     continueRoutine = True
     # update component parameters for each repeat
     thisExp.addData('conclusion.started', globalClock.getTime())
+    # Run 'Begin Routine' code from conc_code
+    df.to_csv(PATH_EXPERIMENT_DATA)
     # keep track of which components have finished
     conclusionComponents = [conclusion_text]
     for thisComponent in conclusionComponents:
