@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2023.2.2),
-    on Wed Nov 29 14:22:49 2023
+    on Wed Nov 29 17:31:44 2023
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -41,7 +41,7 @@ import pandas as pd
 _thisDir = os.path.dirname(os.path.abspath(__file__))
 # Store info about the experiment session
 psychopyVersion = '2023.2.2'
-expName = '186c experiment'  # from the Builder filename that created this script
+expName = 'Group 6 Experiment'  # from the Builder filename that created this script
 expInfo = {
     'participant': randint(100, 999),
     'date': data.getDateStr(),  # add a simple timestamp
@@ -109,7 +109,7 @@ def setupData(expInfo, dataDir=None):
     thisExp = data.ExperimentHandler(
         name=expName, version='',
         extraInfo=expInfo, runtimeInfo=None,
-        originPath='/Users/joycepang/Documents/psych 186c/GitHub/prosody_learning/186c experiment_lastrun.py',
+        originPath='/Users/joycepang/Documents/psych 186c/GitHub/prosody_learning/release 2/Group 6 Experiment_lastrun.py',
         savePickle=True, saveWideText=True,
         dataFileName=dataDir + os.sep + filename, sortColumns='time'
     )
