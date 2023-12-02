@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2023.2.2),
-    on Wed Nov 29 17:31:44 2023
+    on Sat Dec  2 14:40:54 2023
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -36,12 +36,16 @@ from psychopy.hardware import keyboard
 # Run 'Before Experiment' code from init_code
 # Datalogging
 import pandas as pd
+import os
+
+PATH_SRC = 'src'
+PATH_RESULT = 'experiment_data'
 # --- Setup global variables (available in all functions) ---
 # Ensure that relative paths start from the same directory as this script
 _thisDir = os.path.dirname(os.path.abspath(__file__))
 # Store info about the experiment session
 psychopyVersion = '2023.2.2'
-expName = 'Group 6 Experiment'  # from the Builder filename that created this script
+expName = '186c experiment'  # from the Builder filename that created this script
 expInfo = {
     'participant': randint(100, 999),
     'date': data.getDateStr(),  # add a simple timestamp
@@ -109,7 +113,7 @@ def setupData(expInfo, dataDir=None):
     thisExp = data.ExperimentHandler(
         name=expName, version='',
         extraInfo=expInfo, runtimeInfo=None,
-        originPath='/Users/joycepang/Documents/psych 186c/GitHub/prosody_learning/release 2/Group 6 Experiment_lastrun.py',
+        originPath='/Users/joycepang/Documents/psych 186c/GitHub/prosody_learning/release/Group 6 Experiment_lastrun.py',
         savePickle=True, saveWideText=True,
         dataFileName=dataDir + os.sep + filename, sortColumns='time'
     )
@@ -327,27 +331,33 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     intro_key_resp = keyboard.Keyboard()
     # Run 'Begin Experiment' code from init_code
     # Declare number of training/trials beforehand
-    NUM_TRAINING = 6            # max 6
-    NUM_SAMPLES = 2             # max 2
-    NUM_SIGNAL = 16              # max 16
-    NUM_NOISE_SIMILAR = 8       # max 8
-    NUM_NOISE_DIFFERENT = 8     # max 8
+    NUM_TRAINING = 1            # max 6
+    NUM_SAMPLES = 1             # max 2
+    NUM_SIGNAL = 2              # max 16
+    NUM_NOISE_SIMILAR = 1       # max 8
+    NUM_NOISE_DIFFERENT = 1     # max 8
     NUM_TRIALS = NUM_SIGNAL + NUM_NOISE_SIMILAR + NUM_NOISE_DIFFERENT
     
     # Define PATHs
-    PATH_FORM_LIST = 'src/186c experiment survey form.csv'
+    PATH_FORM_LIST = os.path.join(PATH_SRC, '186c experiment survey form.csv')
     
-    PATH_TRAINING_LIST = 'src/training_list.csv'
+    if os.name == 'nt':
+        PATH_TRAINING_LIST = os.path.join(PATH_SRC, 'training_list win.csv')
+    else:
+        PATH_TRAINING_LIST = os.path.join(PATH_SRC, 'training_list.csv')
     PATH_TRAINING_AUDIO = 'audio'
     
-    PATH_SAMPLE_LIST = 'src/sample_list.csv'
+    PATH_SAMPLE_LIST = os.path.join(PATH_SRC, 'sample_list.csv')
     PATH_SAMPLE_AUDIO = 'audio'
     
-    PATH_TRIAL_LIST = 'src/trial_list.csv'
+    if os.name == 'nt':
+        PATH_TRIAL_LIST = os.path.join(PATH_SRC, 'trial_list win.csv')
+    else:
+        PATH_TRIAL_LIST = os.path.join(PATH_SRC, 'trial_list.csv')
     PATH_TRIAL_AUDIO = 'audio'
     
-    PATH_FORM_DATA = f'experiment_data/{expInfo["participant"]}_form.csv'
-    PATH_EXPERIMENT_DATA = f'experiment_data/{expInfo["participant"]}_data.csv'
+    PATH_FORM_DATA = os.path.join(PATH_RESULT, f'{expInfo["participant"]}_form.csv')
+    PATH_EXPERIMENT_DATA = os.path.join(PATH_RESULT, f'{expInfo["participant"]}_data.csv')
     
     # Defines Participant's Condition
     isMono = expInfo['participant']
@@ -421,7 +431,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     imported_training_list = data.importConditions(PATH_TRAINING_LIST)
     training_list = list()
     for item in imported_training_list:
-        training_list.append(f'{PATH_TRAINING_AUDIO}/{item[condition]}')
+            training_list.append(os.path.join(PATH_TRAINING_AUDIO, item[condition]))
     shuffle(training_list)
     training_fixation_1 = visual.TextStim(win=win, name='training_fixation_1',
         text='+',
@@ -456,7 +466,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     imported_sample_list = data.importConditions(PATH_SAMPLE_LIST)
     sample_list = list()
     for item in imported_sample_list:
-        sample_list.append(f'{PATH_SAMPLE_AUDIO}/{item["path"]}')
+        sample_list.append(os.path.join(PATH_SAMPLE_AUDIO, item["path"]))
     sample_sound = sound.Sound('A', secs=-1, stereo=True, hamming=True,
         name='sample_sound')
     sample_sound.setVolume(1.0)
@@ -491,7 +501,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     imported_trial_list = data.importConditions(PATH_TRIAL_LIST)
     trial_list = list()
     for item in imported_trial_list:
-        trial_list.append((f'{PATH_TRIAL_AUDIO}/{item["path"]}', item["type"]))
+        trial_list.append((os.path.join(PATH_TRIAL_AUDIO, item["path"]), item["type"]))
     shuffle(trial_list)
     trial_sound = sound.Sound('A', secs=-1, stereo=True, hamming=True,
         name='trial_sound')
@@ -677,7 +687,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         tThisFlipGlobal = win.getFutureFlipTime(clock=None)
         frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
         # update/draw components on each frame
-        # Run 'Each Frame' code from code
+        # Run 'Each Frame' code from survey_code
         if form.complete:
             survey_button.fillColor = 'blue'
             survey_button.color = 'white'
@@ -798,7 +808,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)
     thisExp.addData('presurvey_questions.stopped', globalClock.getTime())
-    # Run 'End Routine' code from code
+    # Run 'End Routine' code from survey_code
     form_data = form.getData()
     form_return = list()
     for item in form_data:
